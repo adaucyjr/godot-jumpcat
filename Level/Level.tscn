@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Level/Level.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Graphics/Other/Big_Bottom_Typeface_Normal.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 80.1808, 10 )
+
+[node name="Level" type="Node"]
+script = ExtResource( 2 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.976471, 0.941176, 0.882353, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Horizon" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 401.02
+margin_bottom = -314.98
+color = Color( 0.286275, 0.156863, 0.0588235, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -46.0
+margin_top = 36.0
+margin_right = 46.0
+margin_bottom = 49.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.286275, 0.156863, 0.0588235, 1 )
+text = "Score: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2( 157.764, 468.481 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 158.42, 401.914 )
+collision_mask = 6
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Scoretimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Scoretimer" to="." method="_on_Scoretimer_timeout"]
