@@ -46,7 +46,7 @@ __meta__ = {
 }
 
 [node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2( 157.764, 468.481 )
+position = Vector2( 157.764, 490.481 )
 collision_layer = 2
 collision_mask = 0
 __meta__ = {
@@ -57,15 +57,43 @@ __meta__ = {
 shape = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 158.42, 401.914 )
+position = Vector2( 158.42, 426.914 )
 collision_mask = 6
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="ScoreTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="BackgroundStartPositions" type="Node2D" parent="."]
+
+[node name="Position2D" type="Position2D" parent="BackgroundStartPositions"]
+position = Vector2( 1325.25, 126.635 )
+
+[node name="Position2D2" type="Position2D" parent="BackgroundStartPositions"]
+position = Vector2( 1326.93, 188.361 )
+
+[node name="BackgroundTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
 
-[node name="Scoretimer" type="Timer" parent="."]
+[node name="ForegroundStartPositions" type="Node2D" parent="."]
+
+[node name="Position2D" type="Position2D" parent="ForegroundStartPositions"]
+position = Vector2( 1325.26, 549.946 )
+
+[node name="Position2D2" type="Position2D" parent="ForegroundStartPositions"]
+position = Vector2( 1325.25, 612.173 )
+
+[node name="Position2D3" type="Position2D" parent="ForegroundStartPositions"]
+position = Vector2( 1321.89, 681.126 )
+
+[node name="ForegroundTimer" type="Timer" parent="."]
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="Scoretimer" to="." method="_on_Scoretimer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="timeout" from="BackgroundTimer" to="." method="_on_BackgroundTimer_timeout"]
+[connection signal="timeout" from="ForegroundTimer" to="." method="_on_ForegroundTimer_timeout"]
